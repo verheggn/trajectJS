@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBAN Calculator</title>
+    <link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+
+           
+</head>
+
+<body>
+    <div class="container well" align="center">
+          <div class="row">
+            <div class="col-l-4 content">
+                         
+                <h1>IBAN Calculator <span href="#" data-toggle="tooltip" data-placement="right" title="IBAN is het Internationale Bank Account Nummer. Je kunt deze tool gebruiken om met je rekeningnummer je IBAN te berekenen!"><i class="glyphicon glyphicon-question-sign"></i></span></h1>
+                    <br><br>
+                  
+                    <br>
+                    <div class="" id="warningBox"></div>
+                    <form class="form-horizontal form-group">
+                      <p class="text">
+                          <label class="control-label"><b>Selecteer je bank</b></label>
+                            
+                            <select class="form-control" id="bankName">
+                                <option disabled selected value="">--- Kies je bank ---</option>
+                                <option value="ABNA">ABN AMRO</option>
+                                <option value="ASNB">ASN Bank</option>
+                                <option value="INGB">ING</option>
+                                <option value="RABO">Rabobank</option>
+                                <option value="SNSB">SNS Bank</option>
+                                <option value="TRIO">Triodos Bank</option>
+                            </select>
+                            <br><br>
+                           <label  class="control-label"><b>Bankrekeningnummer</b></label>
+                            <span class="input-group">
+                            <span class="input-group-addon glyphicon glyphicon-credit-card"></span>
+                            <input id="bankRekening" type="text" class="form-control" placeholder="Voer je bankrekeningnummer in">
+                            </span>
+                      </p>
+                    <button class="btn btn-success button" id="calculate" type="button"><i class="glyphicon glyphicon-edit"></i>  Calculate!</button>
+                    </form>
+              
+              </div><!-- col-l-4-->
+            </div><!-- row -->
+            <div class="row">
+                <div class="col-l-4">
+                    
+                        <br><br>
+                        <div id="resultPane" class="content">
+                            <div class="" id="copyBox"></div>
+                            <p class="jumbotron pane"><span class="spacing" id="resultWrap"></span><input  class="spacing input-lg" id="result"><span class="spacing" id="hiddenButton"><button class="btn" id="copyButton">Kopiëer</button></span></p>  
+                        </div><!-- resultPane -->
+                </div><!-- col-l-4-->         
+            </div><!-- row -->
+    </div><!-- container -->
+    <script src="script.js"></script>
+</body>
+</html>
