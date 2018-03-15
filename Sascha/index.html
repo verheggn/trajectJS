@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta name="theme-color" content="#84db94">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Helvetios Rooster Tool</title>
+
+    <!-- Bootstrap core CSS -->
+    
+    
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <!-- Custom styles for this template -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.2.2/ical.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+    
+    <!-- TODO put this inside css file -->
+    <style type="text/css">
+        body {
+            padding-top: 5rem;
+            margin: auto;
+        }
+
+        .starter-template {
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+    
+<body >
+ <main role="main" class="container">
+        <div class="starter-template">
+            <h1>Helvetios Rooster Tool</h1>
+            <br>
+            <div class="well" ng-app="roosterApp" ng-controller="RoosterAddController as roosterList">
+                
+            <table class="table table-bordered"   ng-repeat="x in master">
+    <thead class="thead-dark" >
+        <tr >
+        <th id="monday" colspan="5">{{x.data.dag}} ({{x.data.datum}})</th>
+
+        </tr>
+    </thead>
+
+        <tr>
+            <th headers="klant">Klant</th>
+            <th headers="monday">Locatie</th>
+            <th headers="monday">Rol</th>
+            <th headers="monday">Werktijd</th>
+            <th headers="monday">Pauze</th>            
+        </tr>
+        <tr>
+            <div>
+            <td><select id="klantselect">
+                <option value="BPD">BPD</option>
+                <option value="BIM">BIM</option>
+                <option value="FBNL">FBNL</option>
+                <option value="BIV">BouwInvest</option></td>
+            <td>{{x.data.locatie}} </td>
+            <td><select id="rolselect">
+                <option value="scout">scout</option>
+                <option value="chaser">chaser</option>
+                <option value="gatekeeper">gatekeeper</option>
+                <option value="kennis">kennis</option>
+                <option value="pixiecoach">pixiecoach</option>
+                </select></td>
+            <td>{{x.data.werktijd}}</td>
+            <td><select id="pauzeselect">
+                <option value="12:00">12:00</option>
+                <option value="12:00">12:30</option>
+                <option value="12:00">13:00</option>
+                <option value="12:00">13:30</option>
+                </select> </td>
+            </div>
+        </tr>
+    </tbody>
+  </table>
+        </div>
+            <form novalidate>
+            <div class="form-group group1 row">
+            
+            <div class="col">
+                <input id="naamfield" class="form-control group1" type="text" ng-model="naamfield" placeholder="Naam">
+                <input id="calUrl" class="form-control group1" type="text" placeholder="ICal URL" ng-model="roosterUrl"></div>
+                <button class="btn btn-primary group1">Voeg ICal Url Toe</button>
+                </div>
+            </form>
+        </div>
+     
+
+    </main>
+    <!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCgrUclDks8bNdMRwAj25qyjZRGDhvp94o",
+        authDomain: "helvetios-rooster.firebaseapp.com",
+        databaseURL: "https://helvetios-rooster.firebaseio.com",
+        projectId: "helvetios-rooster",
+        storageBucket: "helvetios-rooster.appspot.com",
+        messagingSenderId: "941710115932"
+      };
+      firebase.initializeApp(config);
+    </script>
+    
+    
+
+    
+
+</body>
+</html>
