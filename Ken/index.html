@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="game">
+    
+<head>
+    <title>Game</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="app.css" />
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"  charset="utf-8"></script>    
+</head> 
+    
+<body>
+<div id="header"></div>   
+<div ng-controller="GameController as gCon">
+    
+<!--Displaying games-->
+    <div class="list" ng-repeat="product in gCon.product | orderBy:'price'" ng-show="product.canPurchase">
+    <h1>{{product.name | uppercase}}</h1>
+        <section class="list" ng-controller="TabController as panel">
+            <li class="nav" ng-click="panel.selectTab(0)" ng-class="{active:panel.isSelected(0)}">Cover</li>
+            <li class="nav" ng-click="panel.selectTab(1)" ng-class="{active:panel.isSelected(1)}">Trailer</li>
+            <li class="nav" ng-click="panel.selectTab(2)" ng-class="{active:panel.isSelected(2)}">Reviews</li>
+                <br>
+            
+            <!--Cover-->
+            <img class="thumb" ng-show="panel.isSelected(0)" ng-src="{{product.images[0].thumb}}"/>
+            
+            <!--Trailer-->
+            <div id="trailer" ng-show="panel.isSelected(1)">
+                 <iframe ng-show="product.trailer" width="420" height="315" ng-src="{{product.trailer | trustAsResourceUrl}}"></iframe> 
+                    <h4 ng-show="!product.trailer">Trailer Coming soon</h4>
+            </div>
+            
+            <!--Reviews-->
+            <div ng-show="panel.isSelected(2) && !product.reviews"><h4>No reviews</h4></div>
+            <div ng-show="panel.isSelected(2)" ng-controller="ReviewController as reviewC">
+                <blockquote ng-repeat="review in product.reviews">
+                    <b>Stars: {{review.stars}}/5</b>
+                    {{review.comment}}
+                    <cite>by: {{review.name}}</cite>
+                    <cite>{{review.email}}</cite>
+                </blockquote>
+          
+                    <!--Realtime empty form-->
+                    <b>Stars: {{reviewC.review.stars}}/5</b>
+                    {{reviewC.review.comment}}
+                    <cite>by: {{reviewC.review.name}}</cite>
+                    <cite>{{reviewC.review.email}}</cite>
+            
+            <!--Form; include builtin validation of AngularJS such as ng-invalid and ng-dirty-->
+            <br>
+            <form name="formReview" ng-submit="formReview.$valid && reviewC.addReview(product)" novalidate>
+                <select ng-model="reviewC.review.stars" required>
+                    <option value="1">1 star</option>
+                    <option value="2">2 stars</option>
+                    <option value="3">3 stars</option>
+                    <option value="4">4 stars</option>
+                    <option value="5">5 stars</option>
+                </select><br><br>
+                <textarea ng-model="reviewC.review.comment" placeholder="Comment" required></textarea><br><br>
+                <input ng-model="reviewC.review.name" type="name" placeholder="Name"><br><br>
+                <input ng-model="reviewC.review.email" type="email" placeholder="Email: kenny@hello.com" required><br><br>
+                <div ng-show="!reviewC.review.stars">*Stars required</div>
+                <div ng-show="!reviewC.review.comment">*Comment required</div>
+                <div ng-show="!reviewC.review.email">*Email required</div><br>
+                <input type="submit" value="Submit">
+            </form></div><br>
+            
+            <!--Price, still needs work replacing . with , etc-->
+            <h2>{{product.price | currency : "€"}}</h2>
+
+            <!--Description-->
+            <p>{{product.description}}</p>
+            <b ng-show="product.soldOut">Sold out</b>     
+            <button ng-show="product.canPurchase">Add to Cart</button> 
+                <br><br>   
+        </section>
+    </div>    
+</div>    
+    
+</body>
+</html>
+
