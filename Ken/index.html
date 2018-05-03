@@ -6,11 +6,12 @@
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="app.css" />
     <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="simpleCart.min.js"></script>
     <script type="text/javascript" src="app.js"  charset="utf-8"></script>    
 </head> 
     
 <body>
-<div id="header"></div>   
+<div id="header" class="start"></div>
 <div ng-controller="GameController as gCon">
     
 <!--Displaying games-->
@@ -71,13 +72,15 @@
 
             <!--Description-->
             <p>{{product.description}}</p>
-            <b ng-show="product.soldOut">Sold out</b>     
-            <button ng-show="product.canPurchase">Add to Cart</button> 
+            <b ng-show="product.soldOut">Sold out</b>  
+            
+            <button ng-controller="AddController as addcart" ng-click="addcart.click()" ng-show="product.canPurchase">Add to Cart</button> 
+            
                 <br><br>   
         </section>
     </div>    
-</div>    
-    
+</div> 
+    <div id="cart"></div>
 </body>
 </html>
 

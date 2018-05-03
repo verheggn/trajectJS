@@ -1,4 +1,6 @@
-.list{
+
+
+list{
     width: 600px;
     padding-top: 5px;
     padding-left: 5px;
@@ -29,7 +31,7 @@
 }
 
 .active{
-background-color: darkblue;
+    background-color: darkblue;
 }
 
 .hide{
@@ -42,9 +44,19 @@ background-color: darkblue;
 }
 
 #header{
+    display: block;
     position: relative;
+    top: 0px;
+    transition: .7s;
+    background-color: navy;
+    color: white;
+    height: 50px;
+    width: 100%;
+    font-size: 20px;
+}
+
+#header.start{
     top: -50px;
-    transition: 1s;
 }
 
 .ng-invalid.ng-dirty{
@@ -53,4 +65,17 @@ background-color: darkblue;
 
 .ng-valid.ng-dirty{
     border-color:#78FA89;
+}
+
+#cart{
+    display:block;
+    opacity: 0;
+    position: absolute;
+    top: -250px;
+    right: 0px;
+    width: 300px;
+    height: auto;
+    background-color: navy;
+    color: white;
+    transition: 1s;
 }

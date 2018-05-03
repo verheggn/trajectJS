@@ -1,4 +1,4 @@
-//Data 
+//Data
 var games = [
     {
         name: 'Dragon Ball Fighter Z',
@@ -47,7 +47,7 @@ var games = [
         soldOut: false,
         images: [{thumb: 'images/cover/mmlc.jpg'}],
         reviews: []
-    },   
+    },
     {
         name: 'Assassins Creed Origins',
         price: 53.99,
@@ -67,25 +67,65 @@ var games = [
         soldOut: false,
         images: [{thumb: 'images/cover/p5.jpg'}],
         reviews: []
-    },     
+    },
 ];
+
+var cart = [
+    {name: 'Persona 5',
+     price: 38.49,
+     count: 1
+    },
+    {name: 'Danganronpa V3',
+     price: 44.95,
+     count: 1
+    },
+];
+
+let test = [];
 
 window.onload = init;
 function init(){
     let body = document.body;
-    
     let header =  document.getElementById("header");
         header.innerHTML = "KG - Ken Gameshop";
-        header.style.backgroundColor = "navy";
-        header.style.color = "white";
-        header.style.display = "block";
-        header.style.height = "50px";
-        header.style.width = "100%";
-        header.style.fontSize = "20px";
-    
+
     setTimeout(function(){
-        header.style.top = "0px";
+        header.classList.remove("start");
     }, 500);
+
+    let cartWin = document.getElementById("cart");
+    let i;
+
+    setTimeout(function(){
+        cartWin.style.opacity = 1;
+        cartWin.style.top = "50px";
+    }, 800);
+
+    refreshList();
+
+    //Remove Button function
+    let remButton = document.createElement("button");
+    remButton.innerHTML = "remove";
+    cartWin.appendChild(remButton);
+
+    remButton.onclick = function(){
+        cart.pop()
+        cartWin.innerHTML = "";
+        refreshList();
+        cartWin.appendChild(remButton);
+    }
+
+    function refreshList(){
+        for (i=0; i < cart.length; i++){
+          cartWin.innerHTML += cart[i].name + " " + "€" + cart[i].price + " " + cart[i].count + "x" + "<br>" ;
+        }
+
+        if(cart.length <= 0){
+            remButton.style.display = "none";
+        }
+
+    };
+   
 }
 
 (function(){
@@ -96,7 +136,7 @@ app.controller('GameController', function(){
 
 app.controller("TabController", function(){
     this.tab = 0;
-    
+
     this.selectTab = function(setTab){
         this.tab = setTab;
     };
@@ -105,21 +145,59 @@ app.controller("TabController", function(){
         return this.tab === checkTab;
     };
 });
-    
+
 app.controller("ReviewController", function(){
     this.review = {};
-    
+
     this.addReview = function(product){
         product.reviews.push(this.review);
         this.review = {};
     }
 });
 
-//needed for Embedded Youtube links. 
+//Add to Cart Button
+app.controller("AddController", function(){
+    let cartWin = document.getElementById("cart");
+    let remButton = document.createElement("button");
+    remButton.innerHTML = "remove";
+
+this.click = function(){
+    cart.push({name: 'Game', price: '30.00', count: 1});
+    cartWin.innerHTML = "";
+
+    for (i=0; i < cart.length; i++){
+        cartWin.innerHTML += cart[i].name + " " + "€" + cart[i].price + " " + cart[i].count + "x" + "<br>" ;
+    }
+        cartWin.appendChild(remButton);
+
+    if  (cart.length > 0){
+            remButton.style.display = "block";
+    }
+};
+    remButton.onclick = function(){
+        cart.pop()
+        cartWin.innerHTML = "";
+
+    for (i=0; i < cart.length; i++){
+        cartWin.innerHTML += cart[i].name + " " + "€" + cart[i].price + " " + cart[i].count + "x" + "<br>" ;
+    }
+        cartWin.appendChild(remButton);
+
+    if  (cart.length <= 0){
+            remButton.style.display = "none";
+        }
+    else{
+            remButton.style.display = "block";
+        }
+    }
+
+});
+
+//needed for Embedded Youtube links.
 app.filter('trustAsResourceUrl', ['$sce', function(sce) {
     return function(val) {
         return sce.trustAsResourceUrl(val);
     };
-}]);     
-    
+}]);
+
 })();
